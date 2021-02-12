@@ -2,7 +2,7 @@ import argparse
 from prettytable import from_csv
 
 parser = argparse.ArgumentParser()
-parser.add_argument(--csvfile', type=argparse.FileType('r'), help="CSV file path")
+parser.add_argument('--csvfile', type=argparse.FileType('r'), help="CSV file path")
 args = parser.parse_args()
 
 def main():
