@@ -4,7 +4,11 @@ from prettytable import from_csv
 def get_arguments():
     '''Define the input arguments'''
     parser = argparse.ArgumentParser()
-    parser.add_argument('--csvfile', dest='csvfile', type=argparse.FileType('r'), help='CSV file path')
+    parser.add_argument('--csvfile',
+                        dest='csvfile',
+                        type=argparse.FileType('r'),
+                        help='CSV file path')
+
     args = parser.parse_args()
 
     if not args.csvfile:
@@ -22,5 +26,5 @@ def main():
     print(output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
