@@ -1,10 +1,8 @@
-# 0011.2233.4455
-
 import re
 import argparse
 
 
-def get_arguments():
+def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-M', '--mac-address',
                         dest='macaddress',
@@ -38,13 +36,12 @@ def format_canonical_mac(mac):
 
 def format_cisco_mac(mac):
     cleaned_mac = clean_mac(mac)
-    # assert mac.isalnum(), 'expected only alphanumeric charapters'
     mac = '.'.join(re.findall('.{4}', cleaned_mac))
     return mac
 
 
 def main():
-    args = get_arguments()
+    args = get_args()
     mac_format = validate_mac(args.macaddress)
     if mac_format == 'cisco':
         mac = format_canonical_mac(args.macaddress)

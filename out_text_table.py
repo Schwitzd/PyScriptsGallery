@@ -1,7 +1,8 @@
 import argparse
 from prettytable import from_csv
 
-def get_arguments():
+
+def get_args():
     '''Define the input arguments'''
     parser = argparse.ArgumentParser()
     parser.add_argument('--csvfile',
@@ -12,14 +13,15 @@ def get_arguments():
     args = parser.parse_args()
 
     if not args.csvfile:
-        parser.error("[-] Please specify a csv file, use --help for more info.")
+        parser.error(
+            "[-] Please specify a csv file, use --help for more info.")
 
     return args
 
 
 def main():
     '''Main function'''
-    args = get_arguments()
+    args = get_args()
     with args.csvfile as csvfile:
         output = from_csv(csvfile)
 
