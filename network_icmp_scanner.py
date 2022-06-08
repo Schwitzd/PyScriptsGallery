@@ -1,6 +1,6 @@
 import argparse
 import ipaddress
-import scapy.all as scapy
+from scapy.all import sr, IP, ICMP
 
 
 def get_arguments():
@@ -16,8 +16,8 @@ def get_arguments():
 
 def scan(netmask: str):
     for ip_addr in ipaddress.IPv4Network(netmask):
-        ip_request = scapy.IP(dst=str(ip_addr))
-        ans, unans = scapy.sr(ip_request / scapy.ICMP(), timeout=2, verbose=0)
+        ip_request = IP(dst=str(ip_addr))
+        ans, unans = sr(ip_request / ICMP(), timeout=2, verbose=0)
 
         if not unans:
             ans.summary(

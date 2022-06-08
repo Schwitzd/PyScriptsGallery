@@ -1,5 +1,5 @@
-import scapy.all as scapy
 import argparse
+from scapy.all import srp, Ether, ARP
 
 
 def get_arguments():
@@ -10,10 +10,10 @@ def get_arguments():
 
 
 def scan(ip):
-    arp_request = scapy.ARP(pdst=ip)
-    broadcast = scapy.Ether(dst='ff:ff:ff:ff:ff:ff')
+    arp_request = ARP(pdst=ip)
+    broadcast = Ether(dst='ff:ff:ff:ff:ff:ff')
     arp_request_broadcast = broadcast / arp_request
-    answered_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
+    answered_list = srp(arp_request_broadcast, timeout=1, verbose=False)[0]
 
 
     clients_list= []
