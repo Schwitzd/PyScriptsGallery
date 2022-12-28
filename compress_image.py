@@ -2,6 +2,7 @@ import argparse
 import os
 from PIL import Image
 
+
 def get_args():
     """Get all arguments"""
     parser = argparse.ArgumentParser()
@@ -13,20 +14,19 @@ def get_args():
 def compress_jpg(filepath):
     """Compress jpg images"""
     pathname, filename = os.path.split(filepath)
-    compressed_path = pathname + '\compressed_' + filename
+    compressed_path = f'{pathname}\\compressed_{filename}'
     picture = Image.open(filepath)
-    picture.save(compressed_path, optimize = True, quality = 70)
-
+    picture.save(compressed_path, optimize=True, quality=70)
     return
+
 
 def compress_png(filepath):
     """Compress png images"""
     pathname, filename = os.path.split(filepath)
-    compressed_path = pathname + '\\compressed_' + filename
+    compressed_path = f'{pathname}\\compressed_{filename}'
     picture = Image.open(filepath)
     picture = picture.convert('P', palette=Image.ADAPTIVE, colors=256)
     picture.save(compressed_path, optimize=True)
-
     return
 
 
@@ -37,7 +37,6 @@ def get_images(path):
     for file in os.listdir(path):
         if file.endswith(formats):
             images.append(os.path.join(path, file))
-
     return images
 
 

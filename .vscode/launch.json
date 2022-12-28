@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "args": ["--path","c:\\temp\\test"],
+            "args": ["-i","c:\\temp\\ciao", "-o", "c:\\temp\\ciao.jpg"],
             "console": "integratedTerminal",
             "justMyCode": true
         }

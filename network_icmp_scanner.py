@@ -4,6 +4,7 @@ from scapy.all import sr, IP, ICMP
 
 
 def get_arguments():
+    """Get all arguments"""
     parser = argparse.ArgumentParser()
     parser.add_argument('--subnet', type=str,
                         help='An IP address in CIDR notation defining a subnet '
@@ -15,6 +16,7 @@ def get_arguments():
 
 
 def scan(netmask: str):
+    """Scan subnet"""
     for ip_addr in ipaddress.IPv4Network(netmask):
         ip_request = IP(dst=str(ip_addr))
         ans, unans = sr(ip_request / ICMP(), timeout=2, verbose=0)

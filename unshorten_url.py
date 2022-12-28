@@ -3,6 +3,7 @@ import requests
 
 
 def get_arguments():
+    """Get all arguments"""
     parser = argparse.ArgumentParser()
     parser.add_argument('-u', '--url', dest='url', help='URL to unshort')
     args = parser.parse_args()
@@ -10,12 +11,13 @@ def get_arguments():
 
 
 def unshorten_url(url):
+    """Unshort the URL"""
     try:
         session = requests.Session()
         response = session.head(url, allow_redirects=True)
         print(response.url)
-    except Exception as e:
-        print(e)
+    except Exception as error:
+        print(error)
 
 
 if __name__ == '__main__':
