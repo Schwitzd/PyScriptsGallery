@@ -2,10 +2,11 @@ import os
 import argparse
 import pathlib
 from glob import glob
+from dataclasses import dataclass
 from PIL import Image
 
 
-def get_args():
+def get_args() -> argparse.Namespace:
     """Get all arguments"""
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--images', required=True, type=pathlib.Path,
@@ -17,7 +18,13 @@ def get_args():
     return args
 
 
-def check_same_size(images_filename: list[str]) -> bool:
+@dataclass
+class ImageSize:
+    """Hold the size of a single image"""
+    width: int
+    height: int
+
+def check_size(images_filename: list[str]) -> ImageSize:
     """Check that all images have the same size"""
     reference_size = None
 
@@ -28,16 +35,10 @@ def check_same_size(images_filename: list[str]) -> bool:
             elif reference_size != oi.size:
                 raise ValueError('All images must be with the same size')
 
-    return True
+    return ImageSize(oi.width, oi.height)
 
 
-def get_image_size(image: str) -> list[int]:
-    """Get the size of the first image"""
-    with Image.open(image) as oi:
-        return oi.size
-
-
-def get_images(path: str):
+def get_images(path: str) -> list[str]:
     """Get all images"""
     extensions = ('*.jpg', '*.jpeg', '*.png')
     images = []
@@ -47,10 +48,16 @@ def get_images(path: str):
     return images
 
 
+@dataclass
+class CanvasSize:
+    """Hold the size of the final canvas"""
+    width: int
+    height: int
+
 def calc_canvas_size(
     images: list[str],
-    image_size: list[int]
-) -> list[int]:
+    image_size: ImageSize
+) -> CanvasSize:
     """Calculate the size of the final image"""
     num_images = len(images)
     num_rows = num_images // 2
@@ -58,42 +65,42 @@ def calc_canvas_size(
     if num_images % 2 == 1:
         num_rows += 1 # if there is an odd number of images, add an extra row
 
-    canvas_width = 2 * image_size[0]
-    canvas_height = num_rows * image_size[1]
+    canvas_width = 2 * image_size.width
+    canvas_height = num_rows * image_size.height
 
-    return (canvas_width, canvas_height)
+    return CanvasSize(canvas_width, canvas_height)
 
 
 def generate_canvas(
     images: list[str],
-    image_size: list[int],
-    width: int,
-    height: int,
+    image_size: ImageSize,
+    canvas_size: CanvasSize,
     destination: str
 ) -> None:
     """Generate the canvas of the collage image"""
-    canvas = Image.new('RGB', (width, height))
+    canvas = Image.new('RGB', (canvas_size.width, canvas_size.height))
 
     for i, image in enumerate(images):
-        x = (i % 2) * image_size[0]
-        y = (i // 2) * image_size[1]
+        x = (i % 2) * image_size.width
+        y = (i // 2) * image_size.height
         image_paste = Image.open(image)
         canvas.paste(image_paste, (x, y))
 
     canvas.save(destination)
 
 
-def main():
+def main() -> None:
+    """Main function"""
     args = get_args()
     images = get_images(args.images)
+    image_size = check_size(images)
+ 
 
-    if check_same_size(images):
-        # Get size of first image only
-        image_size = get_image_size(images[0])
+    if image_size:
         # Calculate the size of the canvas
-        width, height = calc_canvas_size(images, image_size)
+        canvas_size = calc_canvas_size(images, image_size)
         # Generate the final image
-        generate_canvas(images, image_size, width, height, args.output)
+        generate_canvas(images, image_size, canvas_size, args.output)
 
 
 if __name__ == "__main__":
