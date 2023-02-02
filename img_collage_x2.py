@@ -94,7 +94,7 @@ def main() -> None:
     args = get_args()
     images = get_images(args.images)
     image_size = check_size(images)
- 
+
 
     if image_size:
         # Calculate the size of the canvas
