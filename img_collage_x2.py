@@ -40,7 +40,7 @@ def check_size(images_filename: list[str]) -> ImageSize:
 
 def get_images(path: str) -> list[str]:
     """Get all images"""
-    extensions = ('*.jpg', '*.jpeg', '*.png')
+    extensions = ('*.jpg', '*.jpeg', '*.jfif', '*.png')
     images = []
     for ext in extensions:
         images.extend(glob(os.path.join(path, ext)))
@@ -94,7 +94,6 @@ def main() -> None:
     args = get_args()
     images = get_images(args.images)
     image_size = check_size(images)
-
 
     if image_size:
         # Calculate the size of the canvas
