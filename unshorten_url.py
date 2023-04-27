@@ -6,8 +6,8 @@ def get_arguments() -> argparse.Namespace:
     """Get all arguments"""
     parser = argparse.ArgumentParser()
     parser.add_argument('-u', '--url', dest='url', help='URL to unshort')
-    args = parser.parse_args()
-    return args
+    arguments = parser.parse_args()
+    return arguments
 
 
 def unshorten_url(url: str) -> str:
@@ -17,7 +17,7 @@ def unshorten_url(url: str) -> str:
         response = session.head(url, allow_redirects=True)
         return response.url
     except requests.exceptions.RequestException as error:
-        return f"Error occurred while unshortering URL: {error}"
+        return f'Error occurred while unshortering URL: {error}'
 
 
 if __name__ == '__main__':

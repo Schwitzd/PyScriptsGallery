@@ -2,7 +2,8 @@ import re
 import argparse
 
 
-class MacAddress:
+class MacAddress():
+    """This class manypulate the MAC address format"""
     def __init__(self, mac):
         self.mac_cleaned = self._clean_mac(mac)
         self.format = self._validate_mac(mac)
@@ -26,7 +27,7 @@ class MacAddress:
         """Convert MAC into Cisco format"""
         return '.'.join(re.findall('.{4}', self.mac_cleaned))
 
-def get_args():
+def get_args() -> argparse.Namespace:
     """Get all arguments"""
     parser = argparse.ArgumentParser()
     parser.add_argument('-M', '--mac-address',
@@ -37,7 +38,7 @@ def get_args():
 
     if not args.macaddress:
         parser.error(
-            "[-] Please specify a MAC Address, use --help for more info.")
+            '[-] Please specify a MAC Address, use --help for more info.')
 
     return args
 
@@ -52,5 +53,5 @@ def main():
         print(mac.to_cisco())
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

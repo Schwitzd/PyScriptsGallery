@@ -10,13 +10,13 @@ def get_args() -> argparse.Namespace:
                         type=argparse.FileType('r'),
                         help='CSV file path')
 
-    args = parser.parse_args()
+    arguments = parser.parse_args()
 
-    if not args.csvfile:
+    if not arguments.csvfile:
         parser.error(
             '[-] Please specify a csv file, use --help for more info.')
 
-    return args
+    return arguments
 
 
 def main():

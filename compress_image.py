@@ -1,9 +1,10 @@
 import argparse
 import os
+from typing import List
 from PIL import Image
 
 
-def get_args():
+def get_args()-> argparse.Namespace:
     """Get all arguments"""
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--path', dest='path', help='image path')
@@ -11,7 +12,7 @@ def get_args():
     return args
 
 
-def compress_jpg(filepath):
+def compress_jpg(filepath: str) -> None:
     """Compress jpg images"""
     pathname, filename = os.path.split(filepath)
     compressed_path = f'{pathname}\\compressed_{filename}'
@@ -20,7 +21,7 @@ def compress_jpg(filepath):
     return
 
 
-def compress_png(filepath):
+def compress_png(filepath: str) -> None:
     """Compress png images"""
     pathname, filename = os.path.split(filepath)
     compressed_path = f'{pathname}\\compressed_{filename}'
@@ -30,7 +31,7 @@ def compress_png(filepath):
     return
 
 
-def get_images(path):
+def get_images(path: str) -> List[str]:
     """Get all images"""
     formats = ('.png', '.jpg', '.jpeg')
     images = []
@@ -52,5 +53,5 @@ def main():
             compress_jpg(image)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
