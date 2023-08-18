@@ -4,11 +4,11 @@ import argparse
 
 class MacAddress():
     """This class manypulate the MAC address format"""
-    def __init__(self, mac):
+    def __init__(self, mac: str) -> None:
         self.mac_cleaned = self._clean_mac(mac)
         self.format = self._validate_mac(mac)
 
-    def _clean_mac(self, mac):
+    def _clean_mac(self, mac: str) -> str:
         return re.sub('[-:.]', '', mac)
 
     def _validate_mac(self, mac):
@@ -19,11 +19,11 @@ class MacAddress():
         else:
             raise ValueError('Provided an invalid MAC Address')
 
-    def to_canonical(self):
+    def to_canonical(self) -> str:
         """Convert MAC into canonical format"""
         return ':'.join(re.findall('.{2}', self.mac_cleaned))
 
-    def to_cisco(self):
+    def to_cisco(self) -> str:
         """Convert MAC into Cisco format"""
         return '.'.join(re.findall('.{4}', self.mac_cleaned))
 

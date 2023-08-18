@@ -18,7 +18,6 @@ def compress_jpg(filepath: str) -> None:
     compressed_path = f'{pathname}\\compressed_{filename}'
     picture = Image.open(filepath)
     picture.save(compressed_path, optimize=True, quality=70)
-    return
 
 
 def compress_png(filepath: str) -> None:
@@ -28,7 +27,6 @@ def compress_png(filepath: str) -> None:
     picture = Image.open(filepath)
     picture = picture.convert('P', palette=Image.ADAPTIVE, colors=256)
     picture.save(compressed_path, optimize=True)
-    return
 
 
 def get_images(path: str) -> List[str]:
