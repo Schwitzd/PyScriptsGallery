@@ -32,7 +32,6 @@ def main():
     args = get_arguments()
 
     san_list = get_san_list(args.website, args.port)
-
     print('Subject Alternative Names (SANs) for:', args.website)
     for san in san_list:
         print(san)
