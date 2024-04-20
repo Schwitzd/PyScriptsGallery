@@ -1,3 +1,8 @@
+"""
+version: 1.5 | Author: Daniel Schwitzgebel | Created: 21.12.2021 | Updated: 20.04.2024
+Description: This script reads a CSV file and displays its contents in a formatted table.
+"""
+
 import argparse
 from prettytable import from_csv
 

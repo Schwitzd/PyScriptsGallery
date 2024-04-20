@@ -1,3 +1,8 @@
+"""
+version: 1.4 | Author: Daniel Schwitzgebel | Created: 08.06.2022 | Updated: 20.04.2024
+Description: This script unshortens a given URL, resolving any redirects, and returns the original URL.
+"""
+
 import argparse
 import requests
 
@@ -6,8 +11,8 @@ def get_arguments() -> argparse.Namespace:
     """Get all arguments"""
     parser = argparse.ArgumentParser()
     parser.add_argument('-u', '--url', dest='url', help='URL to unshort')
-    arguments = parser.parse_args()
-    return arguments
+
+    return parser.parse_args()
 
 
 def unshorten_url(url: str) -> str:

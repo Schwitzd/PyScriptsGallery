@@ -1,3 +1,8 @@
+"""
+version: 1.3 | Author: Daniel Schwitzgebel | Created: 16.06.2023 | Updated: 20.04.2024
+Description: This script monitors a WiFi interface in monitoring mode and captures probe requests, probe responses, and beacon frames, displaying relevant information.
+"""
+
 import os
 import sys
 import subprocess
@@ -9,7 +14,10 @@ from scapy.all import sniff, RadioTap, Dot11, Dot11ProbeResp, Dot11ProbeReq, Dot
 def get_args() -> argparse.Namespace:
     """Get all arguments"""
     parser = argparse.ArgumentParser()
-    parser.add_argument('-I', '--interface', dest='interface', help='Specify the WiFi interface in monitoring mode')
+    parser.add_argument(
+        '-I', '--interface', dest='interface',
+        help='Specify the WiFi interface in monitoring mode'
+    )
 
     args = parser.parse_args()
 

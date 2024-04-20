@@ -1,3 +1,8 @@
+"""
+version: 2.2 | Author: Daniel Schwitzgebel | Created: 28.12.2022 | Updated: 20.04.2024
+Description: This script creates a collage by combining multiple images into a single canvas.
+"""
+
 import os
 import argparse
 import pathlib
@@ -9,13 +14,17 @@ from PIL import Image
 def get_args() -> argparse.Namespace:
     """Get all arguments"""
     parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--images', required=True, type=pathlib.Path,
-                        dest='images', help='image path')
-    parser.add_argument('-o', '--output', required=True, type=pathlib.Path,
-                        dest='output', help='image output path')
-    args = parser.parse_args()
+    parser.add_argument(
+        '-i', '--images', required=True, type=pathlib.Path, dest='images',
+        help='image path'
+    )
 
-    return args
+    parser.add_argument(
+        '-o', '--output', required=True, type=pathlib.Path, dest='output',
+        help='image output path'
+    )
+
+    return parser.parse_args()
 
 
 @dataclass

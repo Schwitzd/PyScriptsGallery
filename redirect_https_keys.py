@@ -1,3 +1,8 @@
+"""
+version: 1.4 | Author: Daniel Schwitzgebel | Created: 18.08.2023 | Updated: 20.04.2024
+Description: This script creates a key file for HTTPS decryption and sets the SSLKEYLOGFILE environment variable accordingly.
+"""
+
 import os
 import argparse
 
@@ -5,11 +10,12 @@ import argparse
 def get_args() -> argparse.Namespace:
     """Get all arguments"""
     parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--path', required=True,
-                        dest='path', help='HTTPS keys file')
-    args = parser.parse_args()
+    parser.add_argument(
+        '-p', '--path', required=True, dest='path',
+        help='HTTPS keys file'
+    )
 
-    return args
+    return parser.parse_args()
 
 def main():
     """Create the key file and add the env variable"""

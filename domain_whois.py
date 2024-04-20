@@ -1,3 +1,8 @@
+"""
+version: 1.1 | Author: Daniel Schwitzgebel | Created: 02.01.2024 | Updated: 20.04.2024
+Description: This script fetches information about a domain, including its creation date
+"""
+
 import argparse
 import whois # python-whois
 
@@ -5,14 +10,16 @@ import whois # python-whois
 def get_args() -> argparse.Namespace:
     """Get all arguments"""
     parser = argparse.ArgumentParser()
-    parser.add_argument('--domain',
-                        type=str,
-                        help='Domain name for which to fetch information.')
+    parser.add_argument(
+        '--domain', type=str,
+        help='Domain name for which to fetch information.'
+    )
 
-    parser.add_argument('--type',
-                        choices=['info', 'creation_date'],
-                        default='info',
-                        help='Specify the type of information to retrieve.')
+    parser.add_argument(
+        '--type', choices=['info', 'creation_date'], default='info',
+        help='Specify the type of information to retrieve.'
+    )
+
     return parser.parse_args()
 
 

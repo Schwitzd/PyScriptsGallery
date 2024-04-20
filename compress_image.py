@@ -1,3 +1,8 @@
+"""
+version: 1.4 | Author: Daniel Schwitzgebel | Created: 24.06.2022 | Updated: 20.04.2024
+Description: This script compresses JPEG and PNG images located in a specified directory.
+"""
+
 import argparse
 import os
 from typing import List
@@ -8,8 +13,7 @@ def get_args()-> argparse.Namespace:
     """Get all arguments"""
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--path', dest='path', help='image path')
-    args = parser.parse_args()
-    return args
+    return parser.parse_args()
 
 
 def compress_jpg(filepath: str) -> None:

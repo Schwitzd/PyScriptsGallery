@@ -1,5 +1,27 @@
+"""
+version: 2.4 | Author: Daniel Schwitzgebel | Created: 29.12.2021 | Updated: 20.04.2024
+Description: This script retrieves the Subject Alternative Names (SANs) for a given website domain.
+"""
+
 import re
 import argparse
+
+
+def get_args() -> argparse.Namespace:
+    """Get all arguments"""
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-M', '--mac-address', dest='macaddress',
+        help='type the Mac Address'
+    )
+
+    args = parser.parse_args()
+
+    if not args.macaddress:
+        parser.error(
+            '[-] Please specify a MAC Address, use --help for more info.')
+
+    return args
 
 
 class MacAddress():
@@ -26,21 +48,6 @@ class MacAddress():
     def to_cisco(self) -> str:
         """Convert MAC into Cisco format"""
         return '.'.join(re.findall('.{4}', self.mac_cleaned))
-
-def get_args() -> argparse.Namespace:
-    """Get all arguments"""
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-M', '--mac-address',
-                        dest='macaddress',
-                        help='type the Mac Address')
-
-    args = parser.parse_args()
-
-    if not args.macaddress:
-        parser.error(
-            '[-] Please specify a MAC Address, use --help for more info.')
-
-    return args
 
 
 def main():

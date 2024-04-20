@@ -1,3 +1,8 @@
+"""
+version: 1.0 | Author: Daniel Schwitzgebel | Created: 18.08.2023 | Updated: 20.04.2024
+Description: This script generates fake person data.
+"""
+
 import argparse
 import pandas as pd
 from faker import Faker
@@ -6,11 +11,12 @@ from faker import Faker
 def get_args() -> argparse.Namespace:
     """Get all arguments"""
     parser = argparse.ArgumentParser()
-    parser.add_argument('-n', '--num_people', type=int,
-                        default=10, help='number of fake people to generate')
-    args = parser.parse_args()
+    parser.add_argument(
+        '-n', '--num_people', type=int, default=10,
+        help='number of fake people to generate'
+    )
 
-    return args
+    return parser.parse_args()
 
 
 def generate_fake_people(num_people):

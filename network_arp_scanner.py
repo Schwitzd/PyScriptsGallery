@@ -1,3 +1,8 @@
+"""
+version: 2.2 | Author: Daniel Schwitzgebel | Created: 31.01.2022 | Updated: 20.04.2024
+Description: This script scans for active devices on a network using ARP and displays their IP and MAC addresses.
+"""
+
 import argparse
 from typing import List
 from scapy.all import srp, Ether, ARP
@@ -7,11 +12,12 @@ from tabulate import tabulate
 def get_arguments() -> argparse.Namespace:
     """Get all arguments"""
     parser = argparse.ArgumentParser()
-    parser.add_argument('-t', '--target', dest='target',
-                        help='Target IP or IP Range')
-    arguments = parser.parse_args()
+    parser.add_argument(
+        '-t', '--target', dest='target',
+        help='Target IP or IP Range'
+    )
 
-    return arguments
+    return parser.parse_args()
 
 
 def arp_scan(ip: str) -> List[str]:
